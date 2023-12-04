@@ -8,6 +8,6 @@ export const GET = async (req, res) => {
 
     return new Response(JSON.stringify(allPrompts), { status: 200 });
   } catch (error) {
-    new Response("Failed to fetch prompts", { status: 500 });
+    return new Response("Failed to fetch prompts", { status: 500 });
   }
 };
