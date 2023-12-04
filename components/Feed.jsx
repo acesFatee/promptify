@@ -2,11 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import FeedCard from "./FeedCard";
+import { useSession } from "next-auth/react";
 
 export default function Feed() {
   const [searchTerm, setSearchTerm] = useState(""); 
   const [posts, setPosts] = useState([]);
   const [originalPosts, setOriginalPosts] = useState([]);
+  const {data: session} = useSession();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,7 +18,7 @@ export default function Feed() {
       setOriginalPosts(data);
     };
     fetchPosts();
-  }, []);
+  }, [session]);
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -27,11 +29,10 @@ export default function Feed() {
         const data = await response.json();
         setPosts(data);
       } else {
-        // Introduce a delay before restoring the original posts
         const delay = setTimeout(() => {
           setPosts(originalPosts);
-        }, 300); // You can adjust the delay duration based on your needs
-        return () => clearTimeout(delay); // Clear the timeout on component unmount
+        }, 300); 
+        return () => clearTimeout(delay); 
       }
     };
 
