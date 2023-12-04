@@ -1,20 +1,21 @@
 'use client'
+
 import FeedCard from "@/components/FeedCard";
 import React, { useEffect, useState } from "react";
 
-export default function page({ params }) {
-
-  const [posts, setposts] = useState([]);
+// Update component name to start with an uppercase letter
+export default function Page({ params }) {
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const fetchTaggedPosts = async () =>{
-      const response = await fetch('/api/tags/'+params.tagName);
-      const data = await response.json(); 
-      setposts(data)
-    }
+    const fetchTaggedPosts = async () => {
+      const response = await fetch('/api/tags/' + params.tagName);
+      const data = await response.json();
+      setPosts(data);
+    };
+
     fetchTaggedPosts();
-  }, [])
-  
+  }, [params.tagName]);
 
   return (
     <div className="container mx-auto ">
