@@ -1,5 +1,6 @@
 import { connectToMongo } from "@/utils/db";
 import Prompt from "@/utils/models/PromptModel";
+import { revalidatePath } from "next/cache";
 
 export const PATCH = async (req, { params }) => {
     const { prompt, tag } = await req.json();
@@ -10,7 +11,7 @@ export const PATCH = async (req, { params }) => {
             prompt: prompt,
             tag: tag
         })
-
+        
         return new Response(JSON.stringify({editedNote}), { status: 200 });
     } catch (error) {
         return new Response("Error Updating Prompt", { status: 500 });

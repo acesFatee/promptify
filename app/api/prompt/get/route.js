@@ -1,5 +1,6 @@
 import { connectToMongo } from "@/utils/db";
 import Prompt from "@/utils/models/PromptModel";
+export const dynamic = "force-dynamic"
 
 export const GET = async (req, res) => {
   try {
