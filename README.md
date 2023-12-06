@@ -21,4 +21,5 @@ Welcome to Promptify, an open-source web application designed for users to share
   - Next.js 14.0.3
   - mongoose
   - MongoDB
+  - NextAuth
 
