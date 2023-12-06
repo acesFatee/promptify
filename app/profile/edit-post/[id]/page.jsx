@@ -61,7 +61,7 @@ export default function Page({params}) {
       {
         session &&  <> 
         <div className="container-fluid flex justify-center">
-        <div className="container mt-10 mx-auto">
+        <div className="container px-4 mt-10 mx-auto">
           <h1 className="font-bold text-6xl bg-clip-text text-transparent bg-gradient-to-r from-orange-300 via-orange-500 to-orange-200 mb-5">
             Edit Prompt
           </h1>

@@ -1,5 +1,6 @@
 "use client";
 
+import Modal from "@/components/Modal";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -9,7 +10,9 @@ export default function Page() {
   const {data: session} = useSession();
   const [prompt, setPrompt] = useState("");
   const [tag, setTag] = useState("");
-
+  const [isopen, setisopen] = useState(false)
+  const [message, setmessage] = useState("")
+  const [title, settitle] = useState("")
 
   const handlePromptChange = (event) => {
     setPrompt(event.target.value);
@@ -22,7 +25,15 @@ export default function Page() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if(!session){
-      router.push('/')
+      settitle("Login needed")
+      setmessage("Please login to add a post")
+      setisopen(true)
+      return;
+    }
+    if(tag.includes('#')){
+      settitle("Symbol error")
+      setmessage("Cannot include # in tag")
+      setisopen(true)
       return;
     }
     try {
@@ -48,7 +59,7 @@ export default function Page() {
       {
         <> 
         <div className="container-fluid flex justify-center">
-        <div className="container mt-10 mx-auto">
+        <div className="container px-3 mt-10 mx-auto">
           <h1 className="font-bold text-6xl bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-orange-500 to-orange-200 mb-5">
             Create Prompt
           </h1>
@@ -81,6 +92,7 @@ export default function Page() {
         </div>
       </div></>
       }
+      <Modal isopen={isopen} setisopen={setisopen} message={message} title={title}/>
     </>
   );
 }

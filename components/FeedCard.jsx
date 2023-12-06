@@ -30,7 +30,7 @@ export default function FeedCard({ isMyProfile, post, username, image }) {
   }, [isCopied]);
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card w-96 bg-base-100 shadow-xl text-left">
       <div className="card-body">
         <div className="flex items-center mb-4">
           <img
